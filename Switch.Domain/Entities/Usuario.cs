@@ -14,6 +14,7 @@ namespace Switch.Domain.Entities
         public DateTime DataNascimento { get; set; }
         public SexoEnum  Sexo { get; set; }
         public string UrlFoto { get; set; }
-        
+        public virtual Identificacao Identificacao { get; set; }
+
     }
 }
