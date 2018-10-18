@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Switch.Domain\Switch.Domain.csproj" />
+    <ProjectReference Include="..\Switch.Infra.Data\Switch.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
