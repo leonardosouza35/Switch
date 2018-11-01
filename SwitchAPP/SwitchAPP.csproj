@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Switch.Domain\Switch.Domain.csproj" />
+    <ProjectReference Include="..\Switch.Infra.CrossCutting.Logging\Switch.Infra.CrossCutting.Logging.csproj" />    
     <ProjectReference Include="..\Switch.Infra.Data\Switch.Infra.Data.csproj" />
   </ItemGroup>
 
