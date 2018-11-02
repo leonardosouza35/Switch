@@ -47,7 +47,7 @@ namespace SwitchAPP
 
             var optionsBuilder = new DbContextOptionsBuilder<SwitchContext>();
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseMySql("Server=localhost;userid=root;password=admin;database=SwitchDB;", m => m.MigrationsAssembly("Switch.Infra.Data").MaxBatchSize(100));
+            optionsBuilder.UseMySql("Server=localhost;userid=newuser2;password=123;database=SwitchDB;", m => m.MigrationsAssembly("Switch.Infra.Data").MaxBatchSize(1000));
             
             
 
