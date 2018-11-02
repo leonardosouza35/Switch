@@ -33,11 +33,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwitchAPP", "SwitchAPP\Swit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Switch.Infra.CrossCutting.Logging", "Switch.Infra.CrossCutting.Logging\Switch.Infra.CrossCutting.Logging.csproj", "{1C462F82-9B6F-4B80-ABFA-D61E0B9D7686}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{8F00C55E-1B16-4439-AF9D-EE0AC2E13FD8}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Google-Drive\Curso-EntityframeworkCore\Secao5\Aula4\script-sql-log.sql = ..\..\..\Google-Drive\Curso-EntityframeworkCore\Secao5\Aula4\script-sql-log.sql
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,7 +81,6 @@ Global
 		{9B113671-DF26-43BA-856D-B16361ABF0CE} = {AFD349AF-200B-4A50-AF92-FAA899EB0897}
 		{DDFC6B6E-C5F9-4A2D-8587-46992774BDA4} = {8B7846E7-6451-46DA-A23C-1A3D64658972}
 		{1C462F82-9B6F-4B80-ABFA-D61E0B9D7686} = {1A0D5D35-3E87-414E-9D15-6C81A62B1459}
-		{8F00C55E-1B16-4439-AF9D-EE0AC2E13FD8} = {8D01A1BE-46C8-49D2-AD05-85E040208231}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {014633A6-BDE3-440C-8906-1B126E8F5DA4}
