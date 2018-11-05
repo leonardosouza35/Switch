@@ -6,6 +6,7 @@ using Switch.Infra.CrossCutting.Logging;
 using Switch.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SwitchAPP
 {
@@ -57,9 +58,15 @@ namespace SwitchAPP
                 {
                     dbcontext.GetService<ILoggerFactory>().AddProvider(new Logger());
 
-                    dbcontext.Usuarios.AddRange(usuarios);
+                    var resultado = dbcontext.Usuarios.Where(u => u.Nome == "usuario1").ToList();  
                     
-                    dbcontext.SaveChanges();
+                    foreach(var us in resultado) //Abrir Conexão
+                    {
+                        AtualizarDadosContato(us);
+                        EnviarMensagensAmigos(us);
+
+                    }//Fechar Conexão
+
                 }
             }catch(Exception ex)
             {
@@ -69,6 +76,16 @@ namespace SwitchAPP
 
             Console.WriteLine("Ok!");
             Console.ReadKey();
+        }
+
+        private static void EnviarMensagensAmigos(Usuario usuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void AtualizarDadosContato(Usuario usuario)
+        {
+            throw new NotImplementedException();
         }
     }
 }
