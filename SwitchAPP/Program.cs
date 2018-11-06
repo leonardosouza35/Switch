@@ -14,63 +14,31 @@ namespace SwitchAPP
     {
         static void Main(string[] args)
         {
-            Usuario usuario1;
-            Usuario usuario2;
-            Usuario usuario3;
-            Usuario usuario4;
-            Usuario usuario5;
-            Usuario usuario6;
-
-            Usuario CriarUsuario(string nome)
-            {
-                return new Usuario()
-                {
-                    Nome = nome,
-                    SobreNome = "SobreUsuario",
-                    Senha = "abc123",
-                    Email = "usuario@teste.com",
-                    DataNascimento = DateTime.Now,
-                    Sexo = Switch.Domain.Enums.SexoEnum.Masculino,
-                    UrlFoto = @"c:\temp"
-                };
-            }
-
-            usuario1 = CriarUsuario("usuario1");
-            usuario2 = CriarUsuario("usuario2");
-            usuario3 = CriarUsuario("usuario3");
-            usuario4 = CriarUsuario("usuario4");
-            usuario5 = CriarUsuario("usuario5");
-            usuario6 = CriarUsuario("usuario6");
-
-            List<Usuario> usuarios = new List<Usuario>() { usuario1, usuario2, usuario3, usuario4, usuario5, usuario6 };
-            
-
 
             var optionsBuilder = new DbContextOptionsBuilder<SwitchContext>();
+
             optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySql("Server=localhost;userid=newuser2;password=123;database=SwitchDB;", m => m.MigrationsAssembly("Switch.Infra.Data").MaxBatchSize(1000));
-            
-            
 
+                        
             try
             {
                 using (var dbcontext = new SwitchContext(optionsBuilder.Options))
                 {
                     dbcontext.GetService<ILoggerFactory>().AddProvider(new Logger());
 
-                    var resultado = dbcontext.Usuarios.Where(u => u.Nome == "usuario1").ToList();  
-                    
-                    foreach(var us in resultado) //Abrir Conexão
-                    {
-                        AtualizarDadosContato(us);
-                        EnviarMensagensAmigos(us);
+                    //var usuarioNovo = CriarUsuario("usuarioNovo1");
+                    //dbcontext.Usuarios.Add(usuarioNovo);
+                    //dbcontext.SaveChanges();
 
-                    }//Fechar Conexão
-
+                    var quantidade = dbcontext.Usuarios.Count(u => u.Nome == "usuarioNovo1");                    
+                    //Console.WriteLine("Nome do Usuario Criado = " + usuarioRetorno.Nome);
                 }
-            }catch(Exception ex)
+                
+            }
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Erro: " + ex.Message);
                 Console.ReadKey();
             }
 
@@ -78,14 +46,48 @@ namespace SwitchAPP
             Console.ReadKey();
         }
 
+        private static void CriarUsuarios()
+        {
+            Usuario usuario1;
+            Usuario usuario2;
+            Usuario usuario3;
+            Usuario usuario4;
+            Usuario usuario5;
+            Usuario usuario6;
+            
+            usuario1 = CriarUsuario("usuario1");
+            usuario2 = CriarUsuario("usuario2");
+            usuario3 = CriarUsuario("usuario3");
+            usuario4 = CriarUsuario("usuario4");
+            usuario5 = CriarUsuario("usuario5");
+            usuario6 = CriarUsuario("usuario6");
+
+            //List<Usuario> usuarios = new List<Usuario>() { usuario1, usuario2, usuario3, usuario4, usuario5, usuario6 };
+        }
+
+
+        public static Usuario CriarUsuario(string nome)
+        {
+            return new Usuario()
+            {
+                Nome = nome,
+                SobreNome = "SobreUsuario",
+                Senha = "abc123",
+                Email = "usuario@teste.com",
+                DataNascimento = DateTime.Now,
+                Sexo = Switch.Domain.Enums.SexoEnum.Masculino,
+                UrlFoto = @"c:\temp"
+            };
+        }
+
         private static void EnviarMensagensAmigos(Usuario usuario)
         {
-            throw new NotImplementedException();
+            
         }
 
         private static void AtualizarDadosContato(Usuario usuario)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
