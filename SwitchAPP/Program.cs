@@ -19,7 +19,7 @@ namespace SwitchAPP
             var optionsBuilder = new DbContextOptionsBuilder<SwitchContext>();
 
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseMySql("Server=localhost;userid=root;password=admin;database=SwitchDB;", m => m.MigrationsAssembly("Switch.Infra.Data").MaxBatchSize(1000));
+            optionsBuilder.UseMySql("Server=DESKTOP-E9PE89C;userid='leo';password=123;database=SwitchDB;", m => m.MigrationsAssembly("Switch.Infra.Data").MaxBatchSize(1000));
 
                         
             try
@@ -27,43 +27,7 @@ namespace SwitchAPP
                 using (var dbcontext = new SwitchContext(optionsBuilder.Options))
                 {
                     //dbcontext.GetService<ILoggerFactory>().AddProvider(new Logger());
-
-                    var usuario0 = CriarUsuario("usuario0");
-                    Console.WriteLine("Criando usuario0..");
-                    Console.WriteLine("Verificando o ChangeTracker de usuario0");                    
-                    ExibirChangeTracker(dbcontext.ChangeTracker);
-
-                    ////Obtendo
-                    //var usuario1 = dbcontext.Usuarios.FirstOrDefault(u => u.Nome == "usuarioNovo1");
-                    //Console.WriteLine("Obtendo usuario1");
-                    //Console.WriteLine("Verificando o ChangeTracker de usuario1");                    
-                    //ExibirChangeTracker(dbcontext.ChangeTracker);
-
-                    ////Editando
-                    //Console.WriteLine("Editando usuario1");
-                    //usuario1.Nome = "NovoNomeUsuario";
-                    //Console.WriteLine("Verificando o ChangeTracker de usuario1");
-                    //ExibirChangeTracker(dbcontext.ChangeTracker);
-
-                    ////Adicionando Novo
-                    //var usuarioNovo2 = CriarUsuario("usuarioNovo2");
-                    //Console.WriteLine("Adicionando usuarioNovo2");
-                    //dbcontext.Usuarios.Add(usuarioNovo2);
-                    //Console.WriteLine("Verificando o ChangeTracker de usuarioNovo2");
-                    //ExibirChangeTracker(dbcontext.ChangeTracker);
-
-                    ////Deletando
-                    //Console.WriteLine("Deletando usuario1");
-                    //Console.WriteLine("Verificando o ChangeTracker de usuario1");
-                    //dbcontext.Usuarios.Remove(usuario1);
-                    //ExibirChangeTracker(dbcontext.ChangeTracker);
-
-                    ////Detached/desanexado
-
-                    //var usuario3 = CriarUsuario("Usuario3");
-                    //Console.WriteLine("Status do Usuario3");
-                    //Console.WriteLine(dbcontext.Entry(usuario3).State);
-                    ////Console.WriteLine("Nome do Usuario Criado = " + usuarioRetorno.Nome);
+                    
                 }
 
             }
@@ -75,6 +39,48 @@ namespace SwitchAPP
 
             Console.WriteLine("Ok!");
             Console.ReadKey();
+        }
+
+        private static void AulaExibirChangeTracker(SwitchContext dbcontext)
+        {            
+            var usuario0 = CriarUsuario("usuario0");
+            Console.WriteLine("Criando usuario0..");
+            Console.WriteLine("Verificando o ChangeTracker de usuario0");
+            dbcontext.Usuarios.Add(usuario0);
+            ExibirChangeTracker(dbcontext.ChangeTracker);
+
+            // #region Operations
+
+            ////Obtendo
+            var usuario1 = dbcontext.Usuarios.FirstOrDefault(u => u.Nome == "usuarioNovo1");
+            Console.WriteLine("Obtendo usuario1");
+            Console.WriteLine("Verificando o ChangeTracker de usuario1");
+            ExibirChangeTracker(dbcontext.ChangeTracker);
+
+            ////Editando
+            Console.WriteLine("Editando usuario1");
+            usuario1.Nome = "NovoNomeUsuario";
+            Console.WriteLine("Verificando o ChangeTracker de usuario1");
+            ExibirChangeTracker(dbcontext.ChangeTracker);
+
+            ////Adicionando Novo
+            var usuarioNovo2 = CriarUsuario("usuarioNovo2");
+            Console.WriteLine("Adicionando usuarioNovo2");
+            dbcontext.Usuarios.Add(usuarioNovo2);
+            Console.WriteLine("Verificando o ChangeTracker de usuarioNovo2");
+            ExibirChangeTracker(dbcontext.ChangeTracker);
+
+            ////Deletando
+            Console.WriteLine("Deletando usuario1");
+            Console.WriteLine("Verificando o ChangeTracker de usuario1");
+            dbcontext.Usuarios.Remove(usuario1);
+            ExibirChangeTracker(dbcontext.ChangeTracker);
+
+            ////Detached/desanexado
+            var usuario3 = CriarUsuario("Usuario3");
+            Console.WriteLine("Status do Usuario3");
+            Console.WriteLine(dbcontext.Entry(usuario3).State);
+            //#endregion
         }
 
         private static void CriarUsuarios()
@@ -125,7 +131,7 @@ namespace SwitchAPP
         {            
             foreach(var entry in changeTracker.Entries())
             {
-                Console.WriteLine("Nome da Entidade: " + entry.Entity.GetType().FullName);
+                Console.WriteLine("Nome da Instancia: " + entry.Entity.GetType().FullName);
                 Console.WriteLine("Status da Entidade: " + entry.State);
                 Console.WriteLine("-------------");                
             }
