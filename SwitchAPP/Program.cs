@@ -20,14 +20,22 @@ namespace SwitchAPP
 
             optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySql("Server=DESKTOP-E9PE89C;userid='leo';password=123;database=SwitchDB;", m => m.MigrationsAssembly("Switch.Infra.Data").MaxBatchSize(1000));
-
-                        
+            optionsBuilder.EnableSensitiveDataLogging();
+                                    
             try
             {
                 using (var dbcontext = new SwitchContext(optionsBuilder.Options))
                 {
-                    //dbcontext.GetService<ILoggerFactory>().AddProvider(new Logger());
-                    
+                    dbcontext.GetService<ILoggerFactory>().AddProvider(new Logger());
+
+                    var usuarioNovoLeo = dbcontext.Usuarios.FirstOrDefault(u => u.Nome == "usuarioNovoLeo");
+
+                    var instuicaoEnsino = new InstituicaoEnsino() { Nome = "Faculdate Bilogia" };
+
+                    usuarioNovoLeo.InstituicoesEnsino.Add(instuicaoEnsino);
+
+                    dbcontext.SaveChanges();
+
                 }
 
             }
@@ -37,7 +45,7 @@ namespace SwitchAPP
                 Console.ReadKey();
             }
 
-            Console.WriteLine("Ok!");
+            //Console.WriteLine("Ok!");
             Console.ReadKey();
         }
 

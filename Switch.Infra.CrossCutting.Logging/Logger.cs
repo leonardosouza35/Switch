@@ -31,7 +31,8 @@ namespace Switch.Infra.CrossCutting.Logging
 
             public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
-                //System.IO.File.AppendAllText(@"c:\temp\log.txt", formatter(state, exception));
+               
+                System.IO.File.AppendAllText(@"c:\temp\log.txt", formatter(state, exception));
                 Console.WriteLine(formatter(state, exception));
             }
         }
